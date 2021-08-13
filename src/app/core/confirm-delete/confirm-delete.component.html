@@ -1,0 +1,10 @@
+<div mat-dialog-title>
+    <h3>Confirmar</h3>
+</div>
+<div mat-dialog-content>
+    <p>¿Está seguro de querer eliminar este elemento? No podrá recuperarlo</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button color="warn" (click)="onClose()">Cancelar</button>
+    <button mat-button color="primary" [mat-dialog-close]="true">Confirmar</button>
+</div>

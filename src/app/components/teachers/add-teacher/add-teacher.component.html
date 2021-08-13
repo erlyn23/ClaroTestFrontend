@@ -1,0 +1,40 @@
+<div mat-dialog-title>
+    <h3 *ngIf="!data.data">Agregar maestro</h3>
+    <h3 *ngIf="data.data">Modificar maestro</h3>
+</div>
+<div mat-dialog-content>
+    <form [formGroup]="teacherForm">
+        <mat-form-field class="max-width">
+            <mat-label>Nombre completo</mat-label>
+            <input formControlName="fullName" type="text" matInput>
+
+            <mat-error *ngIf="isValidField('fullName') === 'invalid'">
+                <span *ngIf="teacherForm.get('fullName')?.errors?.required">El nombre es obligatorio</span>
+                <span *ngIf="teacherForm.get('fullName')?.errors?.minlength">El nombre debe contener al menos 3 letras</span>
+                <span *ngIf="teacherForm.get('fullName')?.errors?.maxlength">El nombre debe contener menos de 30 letras</span>
+                <span *ngIf="teacherForm.get('fullName')?.errors?.pattern">El nombre no está completo. Ej: Juan Batista</span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="max-width">
+            <mat-label>Teléfono</mat-label>
+            <input type="text" matInput formControlName="phone">
+            <mat-error *ngIf="isValidField('phone') === 'invalid'">
+                <span *ngIf="teacherForm.get('phone')?.errors?.required">El teléfono es obligatorio</span>
+                <span *ngIf="teacherForm.get('phone')?.errors?.maxlength">Escribe menos de 20 números</span>
+                <span *ngIf="teacherForm.get('phone')?.errors?.pattern">Solo puedes escribir números</span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="max-width">
+            <mat-label>Correo</mat-label>
+            <input type="email" matInput formControlName="email">
+            <mat-error *ngIf="isValidField('email') === 'invalid'">
+                <span *ngIf="teacherForm.get('email')?.errors?.maxlength">Escribe menos de 50 letras</span>
+                <span *ngIf="teacherForm.get('email')?.errors?.pattern">El correo no es válido</span>
+            </mat-error>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="accent" [disabled]="teacherForm.invalid" [mat-dialog-close]="teacherForm.value">Enviar</button>
+    <button mat-button color="warn" (click)="onClose()">Cancelar</button>
+</div>

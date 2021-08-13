@@ -1,0 +1,75 @@
+<div mat-dialog-title>
+    <h3>Realizar asignación</h3>
+</div>
+<div mat-dialog-content>
+    <form [formGroup]="assignmentForm">
+        <mat-form-field class="max-width">
+            <mat-label>Estudiante</mat-label>
+            <mat-select (ngModelChange)="selectStudent($event)" formControlName="studentId">
+                <mat-option disabled selected value="0">Selecciona un estudiante...</mat-option>
+                <mat-option *ngFor="let student of students" [value]="student.id">{{student.fullName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="isValidField('studentId') === 'invalid'">
+                <span *ngIf="assignmentForm.get('studentId')?.errors?.required">Selecciona un estudiante</span>
+            </mat-error>
+        </mat-form-field>
+
+        <div class="students-chips">
+            <mat-chip-list *ngIf="temporalStudents.length > 0">
+                <mat-chip *ngFor="let student of temporalStudents" (removed)="removeStudent(student)" [removable]="true">{{student.fullName}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+
+        <mat-form-field class="max-width">
+            <mat-label>Maestro</mat-label>
+            <mat-select formControlName="teacherId">
+                <mat-option disabled selected value="0">Selecciona un maestro...</mat-option>
+                <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">{{teacher.fullName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="isValidField('teacherId') === 'invalid'">
+                <span *ngIf="assignmentForm.get('teacherId')?.errors?.required">Selecciona un maestro</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="max-width">
+            <mat-label>Curso</mat-label>
+            <mat-select formControlName="classRoomId">
+                <mat-option disabled selected value="0">Selecciona un curso...</mat-option>
+                <mat-option *ngFor="let classRoom of classRooms" [value]="classRoom.id">{{classRoom.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="isValidField('classRoomId') === 'invalid'">
+                <span *ngIf="assignmentForm.get('classRoomId')?.errors?.required">Selecciona un curso</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="max-width">
+            <mat-label>Día</mat-label>
+            <mat-select formControlName="dayOfWeekId">
+                <mat-option disabled selected value="0">Selecciona un día...</mat-option>
+                <mat-option *ngFor="let day of daysOfWeek" [value]="day.id">{{day.day}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="isValidField('dayOfWeekId') === 'invalid'">
+                <span *ngIf="assignmentForm.get('dayOfWeekId')?.errors?.required">Selecciona un día</span>
+            </mat-error>
+        </mat-form-field>
+
+        <div class="max-width">
+            <label>Hora de inicio</label><br>
+            <input type="time" min="8:00" max="17:00" formControlName="startHour">
+        </div>
+
+        <div class="max-width">
+            <label>Hora de fin</label><br>
+            <input type="time" min="8:00" max="17:00" formControlName="endHour">
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="accent" [disabled]="assignmentForm.invalid" [mat-dialog-close]="{
+        formValue: assignmentForm.value,
+        temporalStudents: temporalStudents
+    }">Enviar</button>
+    <button mat-button color="warn" (click)="onClose()">Cancelar</button>
+</div>

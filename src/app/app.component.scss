@@ -1,0 +1,42 @@
+.sidenav-container {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .sidenav-links{
+        width: 20%;
+    }
+    .sidenav-content{
+        padding: 10px;
+    }
+
+    // .toggle-button-container{
+    //     width: 100%;
+    //     display: flex;
+    //     justify-content: center;
+    // }
+}
+
+::ng-deep.error-snackbar{
+    background-color: #ce3c2f !important;
+    color: white !important;
+}
+
+::ng-deep.success-snackbar{
+    background-color: rgb(26, 185, 26) !important;
+    color: white !important;
+}
+
+.nav-title{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+
+    h3{
+        font-size: 15px;
+        font-weight: bold;
+    }
+}

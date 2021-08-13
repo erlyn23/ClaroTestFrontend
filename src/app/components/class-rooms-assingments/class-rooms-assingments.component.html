@@ -1,0 +1,55 @@
+<div class="page-title">
+    <h3>Sistema de asignación</h3>
+</div>
+
+<mat-card>
+    <mat-card-content>
+        <button mat-raised-button color="accent" (click)="doAssignment()">
+            <mat-icon>
+                add_circle_outline
+            </mat-icon>
+            Nueva asignación
+        </button>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource] = "dataSource">
+                
+                <ng-container matColumnDef="Estudiante">
+                    <th mat-header-cell *matHeaderCellDef> Estudiante </th>
+                    <td mat-cell *matCellDef="let assignment"> {{assignment.student.fullName}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="Maestro">
+                    <th mat-header-cell *matHeaderCellDef> Maestro </th>
+                    <td mat-cell *matCellDef="let assignment"> {{assignment.teacher.fullName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Curso">
+                    <th mat-header-cell *matHeaderCellDef> Curso </th>
+                    <td mat-cell *matCellDef="let assignment"> {{assignment.classRoom.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Día">
+                    <th mat-header-cell *matHeaderCellDef> Día </th>
+                    <td mat-cell *matCellDef="let assignment"> {{assignment.dayOfWeekName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Hora de inicio">
+                    <th mat-header-cell *matHeaderCellDef> Hora de inicio </th>
+                    <td mat-cell *matCellDef="let assignment"> {{assignment.startHour}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Hora de fin">
+                    <th mat-header-cell *matHeaderCellDef> Hora de fin </th>
+                    <td mat-cell *matCellDef="let assignment"> {{assignment.endHour}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                           showFirstLastButtons >
+            </mat-paginator>
+          </div>
+    </mat-card-content>
+</mat-card>

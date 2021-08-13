@@ -1,0 +1,53 @@
+<div class="page-title">
+    <h3>Mantenimiento de maestros</h3>
+</div>
+
+<mat-card>
+    <mat-card-content>
+        <button mat-raised-button color="accent" (click)="addTeacher()">
+            <mat-icon>
+                add_circle_outline
+            </mat-icon>
+            Nuevo
+        </button>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource] = "dataSource">
+                
+                <ng-container matColumnDef="Nombre">
+                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                    <td mat-cell *matCellDef="let teacher"> {{teacher.fullName}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="Teléfono">
+                    <th mat-header-cell *matHeaderCellDef> Teléfono </th>
+                    <td mat-cell *matCellDef="let teacher"> {{teacher.phone}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Email">
+                    <th mat-header-cell *matHeaderCellDef> Correo electrónico </th>
+                    <td mat-cell *matCellDef="let teacher"> {{teacher.email}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="Acciones">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let teacher">
+                        <button mat-button (click)="editTeacher(teacher)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-button color="warn" (click)="deleteTeacher(teacher.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                           showFirstLastButtons >
+            </mat-paginator>
+          </div>
+    </mat-card-content>
+</mat-card>

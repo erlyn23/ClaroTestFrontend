@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  endpoints:{
+    teachers: 'https://localhost:44342/api/Teacher',
+    students: 'https://localhost:44342/api/Student',
+    classRooms: 'https://localhost:44342/api/ClassRoom',
+    assignments: 'https://localhost:44342/api/ClassRoomAssignment'
+  }
 };
 
 /*

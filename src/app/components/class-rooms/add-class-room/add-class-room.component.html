@@ -1,0 +1,56 @@
+<div mat-dialog-title>
+    <h3 *ngIf="!data.data">Agregar curso</h3>
+    <h3 *ngIf="data.data">Modificar curso</h3>
+</div>
+<div mat-dialog-content>
+    <form [formGroup]="classRoomForm">
+        <mat-form-field class="max-width">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="name" type="text" matInput>
+
+            <mat-error *ngIf="isValidField('name') === 'invalid'">
+                <span *ngIf="classRoomForm.get('name')?.errors?.required">El nombre es obligatorio</span>
+                <span *ngIf="classRoomForm.get('name')?.errors?.minlength">El nombre debe contener al menos 3 letras</span>
+                <span *ngIf="classRoomForm.get('name')?.errors?.maxlength">El nombre debe contener menos de 30 letras</span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="max-width">
+            <mat-label>Código</mat-label>
+            <input type="text" matInput formControlName="code">
+            <mat-error *ngIf="isValidField('code') === 'invalid'">
+                <span *ngIf="classRoomForm.get('code')?.errors?.required">El código es obligatorio</span>
+                <span *ngIf="classRoomForm.get('code')?.errors?.maxlength">Solo puedes escribir 10 carácteres</span>
+                <span *ngIf="classRoomForm.get('code')?.errors?.pattern">Solo puedes escribir 10 carácteres</span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="max-width">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput cols="30" rows="5" formControlName="description" style="resize: none;"></textarea>
+            <mat-error *ngIf="isValidField('description') === 'invalid'">
+                <span *ngIf="classRoomForm.get('description')?.errors?.maxlength">Escribe menos de 100 letras</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="max-width">
+            <mat-label>Cantidad máxima de maestros</mat-label>
+            <input type="text" matInput formControlName="teachersQuantity">
+            <mat-error *ngIf="isValidField('teachersQuantity') === 'invalid'">
+                <span *ngIf="classRoomForm.get('teachersQuantity')?.errors?.required">Debes escribir la cantidad máxima de maestros</span>
+                <span *ngIf="classRoomForm.get('teachersQuantity')?.errors?.pattern">Solo escribe números</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="max-width">
+            <mat-label>Cantidad máxima de estudiantes</mat-label>
+            <input type="text" matInput formControlName="studentsQuantity">
+            <mat-error *ngIf="isValidField('studentsQuantity') === 'invalid'">
+                <span *ngIf="classRoomForm.get('studentsQuantity')?.errors?.required">Debes escribir la cantidad máxima de estudiantes</span>
+                <span *ngIf="classRoomForm.get('studentsQuantity')?.errors?.pattern">Solo escribe números</span>
+            </mat-error>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="accent" [disabled]="classRoomForm.invalid" [mat-dialog-close]="classRoomForm.value">Enviar</button>
+    <button mat-button color="warn" (click)="onClose()">Cancelar</button>
+</div>
